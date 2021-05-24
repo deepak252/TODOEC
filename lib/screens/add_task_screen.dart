@@ -40,7 +40,9 @@ class AddTaskScreen extends StatelessWidget {
               ),
               SizedBox(height: 24,),
               MaterialButton(
-                onPressed: (){},
+                onPressed: (){
+                  
+                },
                 // padding: EdgeInsets.symmetric(horizontal:100,vertical: 24),
                 child: Text(
                   'Add',
