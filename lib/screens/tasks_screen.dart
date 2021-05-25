@@ -10,8 +10,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  String addText='';
-
   List <Task> tasks=[
     Task(name: 'Buy milk'),
     Task(name: 'Buy bread'),
@@ -27,21 +25,25 @@ class _TasksScreenState extends State<TasksScreen> {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: ()async{
-          addText= await showModalBottomSheet(
+        onPressed: (){
+          showModalBottomSheet(
             context: context,
             // isScrollControlled: true,
             builder: (context)=>SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
+                child: AddTaskScreen(
+                  (newTaskTitle){
+                    //print(newTaskTitle);
+                    setState(() {
+                      tasks.add(Task(name:newTaskTitle,isDone: false));
+                    });
+                    Navigator.pop(context);
+                  }
+                ),
               ),
             ) ,
           );
-          print("returned data "+addText);
-          setState(() {
-           tasks.add(Task(name:addText,isDone:false)); 
-          });
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -73,7 +75,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ) ,
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length} Tasks',
                   style:TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

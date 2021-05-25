@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  @override
-  _AddTaskScreenState createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
-  String newTaskTitle;
+class AddTaskScreen extends StatelessWidget {
+  final Function addTaskCallback;
+  AddTaskScreen(this.addTaskCallback);
+   
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle;
     return Container(
       color: Color(0xffa757575),
       child: Container(
@@ -47,8 +45,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               SizedBox(height: 24,),
               MaterialButton(
                 onPressed: (){
-                  // print(newTaskTitle);
-                  Navigator.pop(context,newTaskTitle);
+                  // Navigator.pop(context,newTaskTitle);
+                  addTaskCallback(newTaskTitle);
                 },
                 // padding: EdgeInsets.symmetric(horizontal:100,vertical: 24),
                 child: Text(
