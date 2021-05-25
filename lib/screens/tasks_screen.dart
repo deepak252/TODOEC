@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/add_task_screen.dart';
 import 'package:myapp/widgets/tasks_list.dart';
+import 'package:myapp/modal/task.dart';
 
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
 
+class _TasksScreenState extends State<TasksScreen> {
+  String addText='';
+
+  List <Task> tasks=[
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy bread'),
+    Task(name: 'Buy eggs'),
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy bread'),
+    Task(name: 'Buy eggs'),
+    
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          showModalBottomSheet(
+        onPressed: ()async{
+          addText= await showModalBottomSheet(
             context: context,
             // isScrollControlled: true,
             builder: (context)=>SingleChildScrollView(
@@ -22,6 +38,10 @@ class TasksScreen extends StatelessWidget {
               ),
             ) ,
           );
+          print("returned data "+addText);
+          setState(() {
+           tasks.add(Task(name:addText,isDone:false)); 
+          });
         },
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
@@ -75,7 +95,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(22.0)
                 )
               ),
-              child: TasksList(),
+              child: TasksList(tasks: tasks,),
             ),
           ),
 
