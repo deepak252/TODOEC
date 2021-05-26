@@ -1,24 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/modal/task_data.dart';
 import 'package:myapp/screens/add_task_screen.dart';
 import 'package:myapp/widgets/tasks_list.dart';
-import 'package:myapp/modal/task.dart';
+// import 'package:myapp/modal/task.dart';
+import 'package:provider/provider.dart';
 
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List <Task> tasks=[
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy bread'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy bread'),
-    Task(name: 'Buy eggs'),
-    
-  ];
+class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +23,9 @@ class _TasksScreenState extends State<TasksScreen> {
                 child: AddTaskScreen(
                   (newTaskTitle){
                     //print(newTaskTitle);
-                    setState(() {
-                      tasks.add(Task(name:newTaskTitle,isDone: false));
-                    });
+                    // setState(() {
+                    //   tasks.add(Task(name:newTaskTitle,isDone: false));
+                    // });
                     Navigator.pop(context);
                   }
                 ),
@@ -75,7 +63,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ) ,
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).tasks.length} Tasks',
                   style:TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -97,7 +85,9 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(22.0)
                 )
               ),
-              child: TasksList(tasks: tasks,),
+              child: TasksList(
+                // tasks:Provider.of<TaskData>(context).tasks,
+              ),
             ),
           ),
 
