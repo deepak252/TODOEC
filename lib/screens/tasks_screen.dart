@@ -17,21 +17,6 @@ class TasksScreen extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             builder: (context)=>AddTaskScreen(),
-            // isScrollControlled: true,
-            // builder: (context)=>SingleChildScrollView(
-            //   child: Container(
-            //     padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-            //     child: AddTaskScreen(
-            //       (newTaskTitle){
-            //         //print(newTaskTitle);
-            //         // setState(() {
-            //         //   tasks.add(Task(name:newTaskTitle,isDone: false));
-            //         // });
-            //         Navigator.pop(context);
-            //       }
-            //     ),
-            //   ),
-            // ) ,
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -86,9 +71,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(22.0)
                 )
               ),
-              child: TasksList(
-                // tasks:Provider.of<TaskData>(context).tasks,
-              ),
+              child: TasksList( ),
             ),
           ),
 
